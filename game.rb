@@ -12,7 +12,7 @@ class Game < Gosu::Window
   def initialize
     super(720, 480, false)
     $window = self
-    @client = ENet::Connection.new('192.168.1.107', 56789, 4, 0, 0)
+    @client = ENet::Connection.new('localhost', 56789, 4, 0, 0)
     @client.on_connection(method(:on_connect))
     @client.on_packet_receive(method(:on_packet))
     @client.on_disconnection(method(:on_disconnect))
@@ -43,7 +43,7 @@ class Game < Gosu::Window
 
     @tick = 0 if @tick >= 65
 
-    self.caption = "fps: #{Gosu.fps} - sent: #{@client.total_sent_packets} - received: #{@client.total_received_packets} - UP: #{(@client.total_sent_data*0.125/1024/1024).round(3)}MB - DOWN: #{(@client.total_received_data*0.125/1024/1024).round(3)}MB - P: #{@game_packet}"
+    self.caption = "fps: #{Gosu.fps} - sent: #{@client.total_sent_packets} - received: #{@client.total_received_packets} - UP: #{(((@client.total_sent_data*0.125)/1024)/1024).round(3)}MB - DOWN: #{(@client.total_received_data*0.125/1024/1024).round(3)}MB - P: #{@game_packet}"
 
     @player.update
 
