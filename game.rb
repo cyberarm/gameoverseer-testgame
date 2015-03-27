@@ -43,7 +43,7 @@ class Game < Gosu::Window
 
     @tick = 0 if @tick >= 65
 
-    self.caption = "fps: #{Gosu.fps} - sent: #{@client.total_sent_packets} - received: #{@client.total_received_packets} - UP: #{(@client.total_sent_data/1024.0/1024).round(3)}MB - DOWN: #{(@client.total_received_data/1024.0/1024).round(3)}MB - P: #{@game_packet}"
+    self.caption = "fps: #{Gosu.fps} - sent: #{@client.total_sent_packets} - received: #{@client.total_received_packets} - UP: #{(@client.total_sent_data*0.125/1024/1024).round(3)}MB - DOWN: #{(@client.total_received_data*0.125/1024/1024).round(3)}MB - P: #{@game_packet}"
 
     @player.update
 
